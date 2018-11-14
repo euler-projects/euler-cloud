@@ -24,6 +24,7 @@
 
     <modules>
         <module>euler-cloud-parent</module>
+        <module>euler-cloud-dependencies</module>
     </modules>
 
     <profiles>
