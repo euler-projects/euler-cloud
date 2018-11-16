@@ -17,6 +17,7 @@ package org.eulerframework.cloud.config;
 
 import org.eulerframework.common.util.Assert;
 import org.eulerframework.common.util.CommonUtils;
+import org.eulerframework.common.util.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "euler")
 public class EulerCloudConfig implements InitializingBean {
     private String runtimePath;
+    private String tmpPath;
 
     public String getRuntimePath() {
         return runtimePath;
@@ -34,8 +36,22 @@ public class EulerCloudConfig implements InitializingBean {
         this.runtimePath = CommonUtils.convertDirToUnixFormat(runtimePath, false);
     }
 
+    public String getTmpPath() {
+        return tmpPath;
+    }
+
+    public void setTmpPath(String tmpPath) {
+        this.tmpPath = CommonUtils.convertDirToUnixFormat(tmpPath, false);
+    }
+
     @Override
     public void afterPropertiesSet() {
         Assert.hasText(this.runtimePath, "euler cloud app runtime path must be setted.");
+
+        if(this.tmpPath == null) {
+            this.tmpPath = this.runtimePath + "/tmp";
+        } else {
+            Assert.hasText(this.tmpPath, "euler cloud app temp path can not be empty.");
+        }
     }
 }
