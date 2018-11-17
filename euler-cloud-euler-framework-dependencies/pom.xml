@@ -22,6 +22,17 @@
                 <groupId>org.eulerframework</groupId>
                 <artifactId>euler-web-core</artifactId>
                 <version>${eulerframework.version}</version>
+                <exclusions>
+                    <!-- Exclude redis-related dependencies, otherwise actuator will perform health checks on redis links. -->
+                    <exclusion>
+                        <groupId>org.springframework.data</groupId>
+                        <artifactId>spring-data-redis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>redis.clients</groupId>
+                        <artifactId>jedis</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eulerframework</groupId>
