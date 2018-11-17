@@ -39,6 +39,11 @@
                 <artifactId>euler-web-orm-jpa</artifactId>
                 <version>${eulerframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.eulerframework</groupId>
+                <artifactId>euler-web-oauth2-util</artifactId>
+                <version>${eulerframework.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
