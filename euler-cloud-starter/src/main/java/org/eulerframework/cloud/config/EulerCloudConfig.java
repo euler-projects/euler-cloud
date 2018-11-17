@@ -46,7 +46,7 @@ public class EulerCloudConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        Assert.hasText(this.runtimePath, "euler cloud app runtime path must be setted.");
+        Assert.hasText(this.runtimePath, "euler cloud app runtime path must be set.");
 
         if(this.tmpPath == null) {
             this.tmpPath = this.runtimePath + "/tmp";
