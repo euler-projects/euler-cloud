@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.eulerframework.cloud;
+package org.eulerframework.cloud.security;
 
+import org.eulerframework.cloud.security.filter.AuthenticationZuulFilter;
 import org.eulerframework.web.util.ServletUtils;
 
 public class EulerCloudUserContext {
     public static String getCurrentUserId() {
-        return ServletUtils.getRequest().getHeader("Euler-Cloud-Current-User-Id");
+        return ServletUtils.getRequest().getHeader(AuthenticationZuulFilter.EULER_CURRENT_USER_ID_HEADER);
     }
 }
