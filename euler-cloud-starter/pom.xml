@@ -5,7 +5,8 @@
     <parent>
         <groupId>org.eulerframework.cloud</groupId>
         <artifactId>euler-cloud-dependencies</artifactId>
-        <version>1.0.0.M1-SNAPSHOT</version>
+        <version>${revision}</version>
+        <relativePath>../euler-cloud-dependencies</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
