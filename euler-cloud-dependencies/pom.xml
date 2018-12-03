@@ -8,6 +8,7 @@
         <groupId>org.eulerframework.cloud</groupId>
         <artifactId>euler-cloud-build</artifactId>
         <version>${revision}</version>
+        <relativePath>../</relativePath>
     </parent>
 
     <artifactId>euler-cloud-dependencies</artifactId>
