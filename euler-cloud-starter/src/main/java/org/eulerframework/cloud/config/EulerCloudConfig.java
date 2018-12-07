@@ -17,17 +17,18 @@ package org.eulerframework.cloud.config;
 
 import org.eulerframework.common.util.Assert;
 import org.eulerframework.common.util.CommonUtils;
-import org.eulerframework.common.util.StringUtils;
+import org.eulerframework.web.core.exception.web.WebException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConditionalOnClass(WebException.class)//临时用WebException作为EulerCloudConfig的启用标志
 @ConfigurationProperties(prefix = "euler")
 public class EulerCloudConfig implements InitializingBean {
     private String runtimePath;
     private String tmpPath;
-    private Security security = new Security();
 
     public String getRuntimePath() {
         return runtimePath;
@@ -45,14 +46,6 @@ public class EulerCloudConfig implements InitializingBean {
         this.tmpPath = CommonUtils.convertDirToUnixFormat(tmpPath, false);
     }
 
-    public Security getSecurity() {
-        return security;
-    }
-
-    public void setSecurity(Security security) {
-        this.security = security;
-    }
-
     @Override
     public void afterPropertiesSet() {
         Assert.hasText(this.runtimePath, "euler cloud app runtime path must be set.");
@@ -61,18 +54,6 @@ public class EulerCloudConfig implements InitializingBean {
             this.tmpPath = this.runtimePath + "/tmp";
         } else {
             Assert.hasText(this.tmpPath, "euler cloud app temp path can not be empty.");
-        }
-    }
-
-    public class Security {
-        private String[] ignores;
-
-        public String[] getIgnores() {
-            return ignores;
-        }
-
-        public void setIgnores(String[] ignores) {
-            this.ignores = ignores;
         }
     }
 }

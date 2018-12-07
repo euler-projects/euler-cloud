@@ -16,6 +16,7 @@
 package org.eulerframework.cloud.bean;
 
 import org.eulerframework.web.core.i18n.ClassPathReloadableResourceBundleMessageSource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import java.nio.charset.StandardCharsets;
 
 @Configuration
+@ConditionalOnClass(ClassPathReloadableResourceBundleMessageSource.class)
 public class EulerCloudBeans {
 
     @Bean

@@ -17,6 +17,7 @@ package org.eulerframework.cloud;
 
 import org.eulerframework.cloud.bean.EulerCloudBeans;
 import org.eulerframework.cloud.config.EulerCloudConfig;
+import org.eulerframework.cloud.security.config.EulerCloudSecurityConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.Documented;
@@ -30,6 +31,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import({EulerCloudConfig.class, EulerCloudBeans.class})
+@Import({EulerCloudConfig.class, EulerCloudSecurityConfig.class, EulerCloudBeans.class})
 public @interface EulerCloudAutoConfig {
 }
