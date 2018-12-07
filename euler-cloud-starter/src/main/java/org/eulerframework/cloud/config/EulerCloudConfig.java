@@ -27,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
 public class EulerCloudConfig implements InitializingBean {
     private String runtimePath;
     private String tmpPath;
+    private Security security = new Security();
 
     public String getRuntimePath() {
         return runtimePath;
@@ -44,6 +45,14 @@ public class EulerCloudConfig implements InitializingBean {
         this.tmpPath = CommonUtils.convertDirToUnixFormat(tmpPath, false);
     }
 
+    public Security getSecurity() {
+        return security;
+    }
+
+    public void setSecurity(Security security) {
+        this.security = security;
+    }
+
     @Override
     public void afterPropertiesSet() {
         Assert.hasText(this.runtimePath, "euler cloud app runtime path must be set.");
@@ -52,6 +61,18 @@ public class EulerCloudConfig implements InitializingBean {
             this.tmpPath = this.runtimePath + "/tmp";
         } else {
             Assert.hasText(this.tmpPath, "euler cloud app temp path can not be empty.");
+        }
+    }
+
+    public class Security {
+        private String[] ignores;
+
+        public String[] getIgnores() {
+            return ignores;
+        }
+
+        public void setIgnores(String[] ignores) {
+            this.ignores = ignores;
         }
     }
 }
