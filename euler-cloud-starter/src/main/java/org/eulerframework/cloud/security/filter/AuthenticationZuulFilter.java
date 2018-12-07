@@ -19,8 +19,11 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.eulerframework.oauth2.resource.context.EulerOAuth2UserDetails;
 import org.eulerframework.oauth2.resource.context.SpringCloudOAuth2UserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AuthenticationZuulFilter extends ZuulFilter {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     public final static String EULER_CURRENT_USER_ID_HEADER = "Euler-Cloud-Current-User-Id";
 
     @Override
@@ -40,9 +43,13 @@ public class AuthenticationZuulFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-        EulerOAuth2UserDetails eulerOAuth2UserDetails = SpringCloudOAuth2UserContext.getCurrentUser();
-        RequestContext request = RequestContext.getCurrentContext();
-        request.addZuulRequestHeader(EULER_CURRENT_USER_ID_HEADER, eulerOAuth2UserDetails.getUserId());
+        try {
+            EulerOAuth2UserDetails eulerOAuth2UserDetails = SpringCloudOAuth2UserContext.getCurrentUser();
+            RequestContext request = RequestContext.getCurrentContext();
+            request.addZuulRequestHeader(EULER_CURRENT_USER_ID_HEADER, eulerOAuth2UserDetails.getUserId());
+        } catch (Exception e) {
+            this.logger.warn(e.getMessage(), e);
+        }
         return null;
     }
 }
