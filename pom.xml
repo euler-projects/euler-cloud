@@ -22,7 +22,8 @@
     <modules>
         <module>euler-cloud-dependencies</module>
         <module>euler-cloud-starter</module>
-        <module>euler-cloud-euler-framework-dependencies</module>
+        <module>euler-cloud-parent</module>
+        <module>euler-cloud-autoconfigure</module>
     </modules>
 
     <licenses>
