@@ -55,12 +55,10 @@ public class EulerCloudSecurityConfig {
         public void init(WebSecurity builder) {
             String[] noneSecurityPath = this.eulerCloudSecurityConfig.getNoneSecurityPath();
             if(noneSecurityPath != null && noneSecurityPath.length > 0) {
-                AntPathRequestMatcher[] antPathRequestMatchers = new AntPathRequestMatcher[noneSecurityPath.length];
                 builder.ignoring().requestMatchers(
                         Arrays.stream(noneSecurityPath)
                                 .map(AntPathRequestMatcher::new)
-                                .collect(Collectors.toList())
-                                .toArray(antPathRequestMatchers));
+                                .toArray(AntPathRequestMatcher[]::new));
             }
         }
 

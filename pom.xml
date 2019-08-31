@@ -12,12 +12,12 @@
 
     <groupId>org.eulerframework.cloud</groupId>
     <artifactId>euler-cloud-build</artifactId>
-    <version>1.0.0.M1-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <!--<properties>-->
-        <!--<revision>1.0.0.M1-SNAPSHOT</revision>-->
-    <!--</properties>-->
+    <properties>
+        <revision>1.0.0.M1-SNAPSHOT</revision>
+    </properties>
 
     <modules>
         <module>euler-cloud-dependencies</module>
