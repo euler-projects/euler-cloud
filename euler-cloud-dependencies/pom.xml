@@ -17,9 +17,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.eulerframework</groupId>
-                <artifactId>euler-framework-dependencies</artifactId>
-                <version>1.0.0.M3-SNAPSHOT</version>
+                <groupId>org.eulerframework.boot</groupId>
+                <artifactId>euler-web-dependencies</artifactId>
+                <version>1.0.0.M4-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -15,11 +15,9 @@
  */
 package org.eulerframework.cloud;
 
-import org.eulerframework.cloud.bean.EulerCloudBeans;
-import org.eulerframework.cloud.config.EulerCloudConfig;
 import org.eulerframework.cloud.security.config.EulerCloudSecurityConfig;
 import org.springframework.context.annotation.Import;
 
-@Import({EulerCloudConfig.class, EulerCloudSecurityConfig.class, EulerCloudBeans.class})
+@Import({EulerCloudSecurityConfig.class})
 public class EulerCloudAutoConfiguration {
 }
