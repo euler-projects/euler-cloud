@@ -54,4 +54,18 @@
         <name>Euler Project</name>
         <url>https://eulerproject.io</url>
     </organization>
+
+    <repositories>
+        <repository>
+            <id>euler-snapshot</id>
+            <name>euler-snapshot</name>
+            <url>https://repo.eulerproject.io/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
