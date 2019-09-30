@@ -28,8 +28,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.Arrays;
 
-@Configuration
-@ConditionalOnClass(WebSecurity.class)
 @ConfigurationProperties(prefix = "euler.security")
 public class EulerCloudSecurityConfig {
     private String[] noneSecurityPath;

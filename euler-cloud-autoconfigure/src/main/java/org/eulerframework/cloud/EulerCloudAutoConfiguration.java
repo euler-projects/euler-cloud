@@ -16,9 +16,18 @@
 package org.eulerframework.cloud;
 
 import org.eulerframework.cloud.security.config.EulerCloudSecurityConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
-@EnableConfigurationProperties({EulerCloudSecurityConfig.class})
 public class EulerCloudAutoConfiguration {
+
+    @Configuration
+    @ConditionalOnClass(WebSecurity.class)
+    @EnableConfigurationProperties({EulerCloudSecurityConfig.class})
+    public static class EulerCloudSecurityAutoConfiguration {
+
+    }
 }

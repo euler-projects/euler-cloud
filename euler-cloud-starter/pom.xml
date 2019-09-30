@@ -18,6 +18,11 @@
             <artifactId>euler-cloud-autoconfigure</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.eulerframework.boot</groupId>
+            <artifactId>spring-boot-starter-euler-web</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
