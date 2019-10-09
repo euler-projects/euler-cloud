@@ -42,7 +42,7 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
+                <groupId>org.eulerframework.cloud</groupId>
                 <artifactId>euler-cloud-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
