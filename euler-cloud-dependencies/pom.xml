@@ -18,7 +18,7 @@
         <euler-boot.verison>1.0.0.M1-SNAPSHOT</euler-boot.verison>
 
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
