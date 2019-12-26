@@ -17,7 +17,8 @@
         <main.basedir>${basedir}/..</main.basedir>
         <euler-boot.verison>1.0.0.M1-SNAPSHOT</euler-boot.verison>
 
-        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
 
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
@@ -27,16 +28,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.eulerframework.boot</groupId>
-                <artifactId>euler-boot-dependencies</artifactId>
-                <version>${euler-boot.verison}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eulerframework.boot</groupId>
+                <artifactId>euler-boot-dependencies</artifactId>
+                <version>${euler-boot.verison}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

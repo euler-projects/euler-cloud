@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 public class AuthenticationZuulFilter extends ZuulFilter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    public final static String EULER_CURRENT_USER_ID_HEADER = "Euler-Cloud-Current-User-Id";
+    public final static String EULER_CURRENT_USER_ID_HEADER = "Euler-Uid";
 
     @Override
     public String filterType() {
