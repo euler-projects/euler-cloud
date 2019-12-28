@@ -19,12 +19,31 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.eulerframework.oauth2.resource.context.EulerOAuth2UserDetails;
 import org.eulerframework.oauth2.resource.context.SpringCloudOAuth2UserContext;
+import org.eulerframework.web.util.ServletUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.CollectionUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthenticationZuulFilter extends ZuulFilter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     public final static String EULER_CURRENT_USER_ID_HEADER = "Euler-Uid";
+    public final List<AntPathRequestMatcher> ignoredPatterns;
+
+    public AuthenticationZuulFilter(String[] ignoredPatterns) {
+        if (ignoredPatterns == null || ignoredPatterns.length == 0) {
+            this.ignoredPatterns = null;
+        } else {
+            this.ignoredPatterns = new ArrayList<>();
+            for (String ignoredPattern : ignoredPatterns) {
+                this.ignoredPatterns.add(new AntPathRequestMatcher(ignoredPattern));
+            }
+        }
+    }
 
     @Override
     public String filterType() {
@@ -38,6 +57,17 @@ public class AuthenticationZuulFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        HttpServletRequest request = ServletUtils.getRequest();
+
+        if (CollectionUtils.isEmpty(this.ignoredPatterns)) {
+            return true;
+        } else {
+            for (AntPathRequestMatcher ignoredPattern : this.ignoredPatterns) {
+                if (ignoredPattern.matches(request)) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
