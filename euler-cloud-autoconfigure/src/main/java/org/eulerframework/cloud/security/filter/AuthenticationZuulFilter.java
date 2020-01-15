@@ -87,9 +87,7 @@ public class AuthenticationZuulFilter extends ZuulFilter {
             request.addZuulRequestHeader(EULER_CURRENT_USER_AUTHORITY_HEADER, Optional.ofNullable(eulerOAuth2UserDetails.getAuthorities())
                     .orElse(Collections.emptyList())
                     .stream()
-                    .filter(Objects::nonNull)
-                    .filter(grantedAuthority -> StringUtils.hasText(grantedAuthority.getAuthority()))
-                    .map(GrantedAuthority::getAuthority)
+                    .filter(StringUtils::hasText)
                     .collect(Collectors.joining(",")));
         } catch (Exception e) {
             this.logger.warn(e.getMessage(), e);
