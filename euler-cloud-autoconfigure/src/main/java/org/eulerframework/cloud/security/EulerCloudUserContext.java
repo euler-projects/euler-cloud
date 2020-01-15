@@ -16,10 +16,34 @@
 package org.eulerframework.cloud.security;
 
 import org.eulerframework.cloud.security.filter.AuthenticationZuulFilter;
+import org.eulerframework.common.util.ArrayUtils;
+import org.eulerframework.common.util.StringUtils;
 import org.eulerframework.web.util.ServletUtils;
+import org.springframework.security.access.AccessDeniedException;
+
+import java.util.Optional;
 
 public class EulerCloudUserContext {
     public static String getCurrentUserId() {
         return ServletUtils.getRequest().getHeader(AuthenticationZuulFilter.EULER_CURRENT_USER_ID_HEADER);
+    }
+
+
+    public static void requiredAuthorities(String... authority) {
+        if(authority == null  || authority.length == 0) {
+            return;
+        }
+
+        String grantedAuthoritiesStr = ServletUtils.getRequest().getHeader(AuthenticationZuulFilter.EULER_CURRENT_USER_AUTHORITY_HEADER);
+        if (StringUtils.hasText(grantedAuthoritiesStr)) {
+            String[] grantedAuthorities = grantedAuthoritiesStr.split(",");
+            for(String requiredAuthority : authority) {
+                if(!ArrayUtils.contains(grantedAuthorities, authority)) {
+                    throw new AccessDeniedException("Access Denied");
+                }
+            }
+        } else {
+            throw new AccessDeniedException("Access Denied");
+        }
     }
 }

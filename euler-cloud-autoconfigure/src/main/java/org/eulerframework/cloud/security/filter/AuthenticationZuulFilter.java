@@ -22,16 +22,23 @@ import org.eulerframework.oauth2.resource.context.SpringCloudOAuth2UserContext;
 import org.eulerframework.web.util.ServletUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AuthenticationZuulFilter extends ZuulFilter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     public final static String EULER_CURRENT_USER_ID_HEADER = "Euler-Uid";
+    public final static String EULER_CURRENT_USER_AUTHORITY_HEADER = "Euler-Authorities";
     public final List<AntPathRequestMatcher> ignoredPatterns;
 
     public AuthenticationZuulFilter(String[] ignoredPatterns) {
@@ -77,6 +84,13 @@ public class AuthenticationZuulFilter extends ZuulFilter {
             EulerOAuth2UserDetails eulerOAuth2UserDetails = SpringCloudOAuth2UserContext.getCurrentUser();
             RequestContext request = RequestContext.getCurrentContext();
             request.addZuulRequestHeader(EULER_CURRENT_USER_ID_HEADER, eulerOAuth2UserDetails.getUserId());
+            request.addZuulRequestHeader(EULER_CURRENT_USER_AUTHORITY_HEADER, Optional.ofNullable(eulerOAuth2UserDetails.getAuthorities())
+                    .orElse(Collections.emptyList())
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .filter(grantedAuthority -> StringUtils.hasText(grantedAuthority.getAuthority()))
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.joining(",")));
         } catch (Exception e) {
             this.logger.warn(e.getMessage(), e);
         }
