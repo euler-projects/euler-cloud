@@ -38,12 +38,12 @@ public class EulerCloudUserContext {
         if (StringUtils.hasText(grantedAuthoritiesStr)) {
             String[] grantedAuthorities = grantedAuthoritiesStr.split(",");
             for(String requiredAuthority : authority) {
-                if(!ArrayUtils.contains(grantedAuthorities, authority)) {
-                    throw new AccessDeniedException("Access Denied");
+                if(!ArrayUtils.contains(grantedAuthorities, requiredAuthority)) {
+                    throw new EulerAccessDeniedException("Access Denied");
                 }
             }
         } else {
-            throw new AccessDeniedException("Access Denied");
+            throw new EulerAccessDeniedException("Access Denied");
         }
     }
 }
