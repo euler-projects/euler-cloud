@@ -35,6 +35,7 @@ public class EulerCloudUserContext {
         }
 
         String grantedAuthoritiesStr = ServletUtils.getRequest().getHeader(AuthenticationZuulFilter.EULER_CURRENT_USER_AUTHORITY_HEADER);
+        System.out.println("!!!!!!!!!!!AUTH:" + grantedAuthoritiesStr);
         if (StringUtils.hasText(grantedAuthoritiesStr)) {
             String[] grantedAuthorities = grantedAuthoritiesStr.split(",");
             for(String requiredAuthority : authority) {
